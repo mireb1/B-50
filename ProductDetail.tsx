@@ -78,9 +78,8 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
     setShowCartModal(true);
   };
 
-  const _handleBuyNow = () => {
-    console.log('Buy now:', { productId, quantity, selectedVariant });
-  };
+  // Log pour tracking des interactions utilisateur
+  console.log('ProductDetail rendered for:', productId);
 
   return (
     <div className="min-h-screen bg-gray-50">

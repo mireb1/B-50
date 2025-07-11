@@ -3,18 +3,57 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { authenticate, AuthUser } from '@/lib/auth';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userType, setUserType] = useState('buyer');
+  const [userType, setUserType] = useState<'buyer' | 'supplier'>('buyer');
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [user, setUser] = useState<AuthUser | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Login attempt:', { email, password, userType });
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const authenticatedUser = await authenticate(email, password);
+      
+      if (authenticatedUser && authenticatedUser.role === userType) {
+        setUser(authenticatedUser);
+        // Redirection selon le type d'utilisateur
+        if (userType === 'buyer') {
+          window.location.href = '/dashboard/buyer';
+        } else {
+          window.location.href = '/dashboard/supplier';
+        }
+      } else {
+        setError('Email, mot de passe ou type d\'utilisateur incorrect');
+      }
+    } catch (err) {
+      setError('Erreur de connexion. Veuillez réessayer.');
+      console.error('Login error:', err);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  // Si utilisateur connecté, afficher un message de succès
+  if (user) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="bg-white p-8 rounded-lg shadow-lg text-center">
+          <div className="text-green-600 text-4xl mb-4">✓</div>
+          <h2 className="text-xl font-bold text-gray-900 mb-2">Connexion réussie !</h2>
+          <p className="text-gray-600 mb-4">Bienvenue {user.name}</p>
+          <p className="text-sm text-gray-500">Redirection en cours...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -59,17 +98,33 @@ export default function LoginPage() {
               </button>
               <button
                 type="button"
-                onClick={() => setUserType('seller')}
+                onClick={() => setUserType('supplier')}
                 className={`flex-1 py-2 px-4 rounded-full text-sm font-medium transition-colors ${
-                  userType === 'seller'
+                  userType === 'supplier'
                     ? 'bg-blue-600 text-white'
                     : 'text-gray-600'
                 }`}
               >
-                Vendeur
+                Fournisseur
               </button>
             </div>
           </div>
+
+          {/* Exemples de connexion */}
+          <div className="mb-6 p-4 bg-blue-50 rounded-lg">
+            <h3 className="text-sm font-medium text-blue-800 mb-2">Comptes de démonstration :</h3>
+            <div className="text-xs text-blue-700 space-y-1">
+              <div><strong>Acheteur:</strong> buyer@b2b.com / buyer</div>
+              <div><strong>Fournisseur:</strong> supplier@b2b.com / supplier</div>
+            </div>
+          </div>
+
+          {/* Affichage des erreurs */}
+          {error && (
+            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-red-700 text-sm">{error}</p>
+            </div>
+          )}
 
           {/* Login Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -125,44 +180,36 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-3 !rounded-button font-medium"
+              disabled={isLoading}
+              className={`w-full py-3 px-4 rounded-lg text-white font-medium transition-colors ${
+                isLoading 
+                  ? 'bg-gray-400 cursor-not-allowed' 
+                  : 'bg-blue-600 hover:bg-blue-700'
+              }`}
             >
-              Se connecter
+              {isLoading ? 'Connexion...' : 'Se connecter'}
             </button>
           </form>
 
-          {/* Divider */}
+          {/* Divider - Simplifié */}
           <div className="my-8">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-200"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="bg-gray-50 px-4 text-gray-500">ou</span>
+                <span className="bg-gray-50 px-4 text-gray-500">Authentification professionnelle</span>
               </div>
             </div>
           </div>
 
-          {/* Social Login */}
-          <div className="space-y-3">
-            <button className="w-full flex items-center justify-center py-3 px-4 border border-gray-200 !rounded-button bg-white">
-              <i className="ri-google-fill text-red-500 mr-3"></i>
-              <span className="text-gray-700">Continuer avec Google</span>
-            </button>
-            
-            <button className="w-full flex items-center justify-center py-3 px-4 border border-gray-200 !rounded-button bg-white">
-              <i className="ri-linkedin-fill text-blue-700 mr-3"></i>
-              <span className="text-gray-700">Continuer avec LinkedIn</span>
-            </button>
-          </div>
-
-          {/* Sign Up Link */}
+          {/* Sign Up Link - Nettoyé */}
           <div className="text-center mt-8 pb-8">
-            <p className="text-gray-600">
-              Pas encore de compte ?{' '}
-              <Link href="/auth/register" className="text-blue-600 font-medium">
-                S'inscrire gratuitement
-              </Link>
+            <p className="text-gray-600 text-sm">
+              Plateforme B2B sécurisée pour professionnels
+            </p>
+            <p className="text-xs text-gray-500 mt-2">
+              © 2025 Mireb Commercial - Tous droits réservés
             </p>
           </div>
         </div>

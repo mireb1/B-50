@@ -27,7 +27,9 @@
     "export": "next build && next export"
   },
   "dependencies": {
+    "@types/jsonwebtoken": "^9.0.10",
     "autoprefixer": "^10.4.21",
+    "jsonwebtoken": "^9.0.2",
     "next": "15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
