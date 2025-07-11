@@ -65,7 +65,7 @@ export default function MediaPage() {
     percentage: 64
   };
 
-  const filterFiles = (type) => {
+  const filterFiles = (type: string) => {
     if (type === 'all') return mediaFiles;
     return mediaFiles.filter(file => file.type === type);
   };
@@ -87,7 +87,7 @@ export default function MediaPage() {
     }, 200);
   };
 
-  const getFileIcon = (type) => {
+  const getFileIcon = (type: string) => {
     switch(type) {
       case 'image': return 'ri-image-line';
       case 'video': return 'ri-video-line';
@@ -97,7 +97,7 @@ export default function MediaPage() {
     }
   };
 
-  const getFileColor = (type) => {
+  const getFileColor = (type: string) => {
     switch(type) {
       case 'image': return 'text-green-600 bg-green-100';
       case 'video': return 'text-red-600 bg-red-100';
