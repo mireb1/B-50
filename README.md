@@ -1,33 +1,50 @@
-# 🚀 B50 Platform - Plateforme B2B Moderne
+# 🚀 Plateforme B2B Next.js - Projet Professionnel
 
-[![Next.js](https://img.shields.io/badge/Next.js-15.1.6-black)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-19.0-blue)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-blue)](https://tailwindcss.com/)
-[![Vercel](https://img.shields.io/badge/Deploy-Vercel-black)](https://vercel.com/)
-[![License](https://img.shields.io/badge/License-MIT-green)](/LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-15.1.6-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4+-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
+[![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?style=flat-square&logo=vercel)](https://vercel.com)
 
-## 📋 Description
+## 📋 Vue d'ensemble
 
-**B50 Platform** est une plateforme B2B moderne et complète qui connecte efficacement les acheteurs et fournisseurs. Développée avec les dernières technologies web, elle offre une expérience utilisateur exceptionnelle et des performances optimales.
+Plateforme B2B moderne et responsive construite avec **Next.js 15**, **TypeScript**, et **Tailwind CSS**. 
+Architecture professionnelle avec support multi-plateforme, CI/CD automatisé, et déploiement optimisé.
 
-### ✨ Fonctionnalités Principales
+### 🌟 Fonctionnalités principales
 
-- 🔐 **Authentification sécurisée** - Système de connexion pour acheteurs et fournisseurs
-- 📱 **Design responsive** - Interface optimisée pour tous les appareils
-- 🎨 **UI/UX moderne** - Design élégant avec Tailwind CSS
-- ⚡ **Performances optimales** - SSG/SSR avec Next.js 15
-- 🔧 **Gestion de médias** - Upload et organisation de fichiers
-- 🌐 **Multi-plateforme** - Déploiement sur Vercel, Netlify, GitHub Pages
-- 🧪 **Tests complets** - Jest + Testing Library
-- 🐳 **Conteneurisation** - Support Docker complet
-- 🚀 **CI/CD automatisé** - GitHub Actions intégré
+- ✅ **Interface Moderne** : Design responsive mobile-first avec Tailwind CSS
+- ✅ **Authentification JWT** : Système de connexion acheteurs/fournisseurs sécurisé
+- ✅ **Dashboards Métiers** : Interfaces dédiées par type d'utilisateur
+- ✅ **Gestion Média** : Upload et organisation de fichiers avec intégration cloud
+- ✅ **Performance** : Optimisation SSG/SSR avec Next.js 15
+- ✅ **Type Safety** : TypeScript strict avec configurations avancées
+- ✅ **Qualité Code** : ESLint, Prettier, Jest, Testing Library
+- ✅ **CI/CD** : GitHub Actions avec déploiement multi-plateforme
+- ✅ **Docker** : Containerisation avec optimisation production
 
-## 🛠️ Stack Technique
+## 🌍 URLs de Déploiement
 
-### Frontend
-- **Framework**: Next.js 15.1.6 (App Router)
-- **UI Library**: React 19
+| Plateforme | URL d'accès | Status | Usage |
+|-----------|-------------|--------|-------|
+| **🚀 Vercel** | [https://b-50.vercel.app](https://b-50.vercel.app) | 🟢 Production | Principal |
+| **🔄 Netlify** | [https://b-50.netlify.app](https://b-50.netlify.app) | 🟢 Staging | Backup |
+| **📖 GitHub Pages** | [https://mireb1.github.io/B-50](https://mireb1.github.io/B-50) | 🟢 Demo | Documentation |
+| **💻 Local Dev** | [http://localhost:3000](http://localhost:3000) | 🔧 Dev | Développement |
+
+### 🔗 Routes Principales
+
+| Route | Description | Accès |
+|-------|-------------|-------|
+| `/` | **Page de connexion** - Authentification principale | 🔓 Public |
+| `/dashboard/buyer` | **Dashboard Acheteur** - Interface métier acheteurs | 🔒 Auth required |
+| `/dashboard/supplier` | **Dashboard Fournisseur** - Interface métier fournisseurs | 🔒 Auth required |
+
+### � Comptes de Démonstration
+
+| Type | Email | Mot de passe | Dashboard |
+|------|-------|--------------|-----------|
+| **👤 Acheteur** | `buyer@b2b.com` | `buyer` | [/dashboard/buyer](https://b-50.vercel.app/dashboard/buyer) |
+| **🏢 Fournisseur** | `supplier@b2b.com` | `supplier` | [/dashboard/supplier](https://b-50.vercel.app/dashboard/supplier) |
 - **Styling**: Tailwind CSS 3.4
 - **Language**: TypeScript 5.0
 - **Font**: Geist, Pacifico

@@ -9,6 +9,20 @@
   ],
   "routes": [
     {
+      "src": "/dashboard/buyer",
+      "dest": "/dashboard/buyer",
+      "headers": {
+        "Cache-Control": "private, no-cache"
+      }
+    },
+    {
+      "src": "/dashboard/supplier", 
+      "dest": "/dashboard/supplier",
+      "headers": {
+        "Cache-Control": "private, no-cache"
+      }
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/api/$1"
     },

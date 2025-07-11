@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { authenticate, AuthUser } from '@/lib/auth';
+import { authenticate, AuthUser, getRedirectUrl } from '@/lib/auth';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -24,12 +24,9 @@ export default function LoginPage() {
       
       if (authenticatedUser && authenticatedUser.role === userType) {
         setUser(authenticatedUser);
-        // Redirection selon le type d'utilisateur
-        if (userType === 'buyer') {
-          window.location.href = '/dashboard/buyer';
-        } else {
-          window.location.href = '/dashboard/supplier';
-        }
+        // Redirection intelligente selon le rôle
+        const redirectUrl = getRedirectUrl(authenticatedUser.role);
+        window.location.href = redirectUrl;
       } else {
         setError('Email, mot de passe ou type d\'utilisateur incorrect');
       }

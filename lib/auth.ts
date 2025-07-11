@@ -47,3 +47,58 @@ export async function authenticate(email: string, password: string): Promise<Aut
 export function hasRole(user: AuthUser | null, role: UserRole): boolean {
   return !!user && user.role === role;
 }
+
+// URLs et routes de l'application
+export const APP_ROUTES = {
+  // Routes publiques
+  HOME: '/',
+  LOGIN: '/',
+  
+  // Routes protégées - Dashboards
+  BUYER_DASHBOARD: '/dashboard/buyer',
+  SUPPLIER_DASHBOARD: '/dashboard/supplier',
+  
+  // Routes métiers (à développer)
+  CATALOG: '/catalog',
+  ORDERS: '/orders',
+  SEARCH: '/search',
+  PROFILE: '/profile',
+} as const;
+
+// URLs de déploiement
+export const DEPLOYMENT_URLS = {
+  PRODUCTION: 'https://b-50.vercel.app',
+  STAGING: 'https://b-50.netlify.app', 
+  DEMO: 'https://mireb1.github.io/B-50',
+  LOCAL: 'http://localhost:3000',
+} as const;
+
+// Comptes de démonstration
+export const DEMO_ACCOUNTS = {
+  BUYER: {
+    email: 'buyer@b2b.com',
+    password: 'buyer',
+    role: 'buyer' as UserRole,
+    dashboardUrl: `${DEPLOYMENT_URLS.PRODUCTION}${APP_ROUTES.BUYER_DASHBOARD}`,
+  },
+  SUPPLIER: {
+    email: 'supplier@b2b.com', 
+    password: 'supplier',
+    role: 'supplier' as UserRole,
+    dashboardUrl: `${DEPLOYMENT_URLS.PRODUCTION}${APP_ROUTES.SUPPLIER_DASHBOARD}`,
+  },
+} as const;
+
+// Redirection après connexion selon le rôle
+export function getRedirectUrl(role: UserRole): string {
+  switch (role) {
+    case 'buyer':
+      return APP_ROUTES.BUYER_DASHBOARD;
+    case 'supplier':
+      return APP_ROUTES.SUPPLIER_DASHBOARD;
+    case 'admin':
+      return '/admin/dashboard';
+    default:
+      return APP_ROUTES.HOME;
+  }
+}
