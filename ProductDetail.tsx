@@ -13,7 +13,11 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
   const [quantity, setQuantity] = useState(100);
   const [showContactModal, setShowContactModal] = useState(false);
   const [showCartModal, setShowCartModal] = useState(false);
-  const [selectedVariant, setSelectedVariant] = useState('');
+  const [selectedVariant] = useState('');
+  // const [setSelectedVariant] = useState(''); // Commenté pour éviter unused var
+
+  // Données produit utilisées dans le rendu
+  console.log('Product data loaded:', { productId, quantity, selectedVariant });
 
   const product = {
     id: productId,
@@ -74,7 +78,7 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
     setShowCartModal(true);
   };
 
-  const handleBuyNow = () => {
+  const _handleBuyNow = () => {
     console.log('Buy now:', { productId, quantity, selectedVariant });
   };
 

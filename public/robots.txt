@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://b50-platform.vercel.app/sitemap.xml
+
+# Disallow specific paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /private/
+
+# Cache information
+# Allow: /static/
+# Allow: /images/
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
